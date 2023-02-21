@@ -115,9 +115,11 @@ u32 CreateSurfablePokemonSprite(void)
 static void CreateOverlaySprite(void)
 {
     u8 overlaySprite;
+    u8 subpriority;
     struct Sprite *sprite;
 
-    overlaySprite = CreateSpriteAtEnd(&gSurfablePokemonOverlaySprites[sCurrentSurfMon], gFieldEffectArguments[0], gFieldEffectArguments[1], 0x96);
+    subpriority = gSprites[gPlayerAvatar.spriteId].subpriority - 1;
+    overlaySprite = CreateSpriteAtEnd(&gSurfablePokemonOverlaySprites[sCurrentSurfMon], gFieldEffectArguments[0], gFieldEffectArguments[1], subpriority);
 
     if (overlaySprite != MAX_SPRITES)
     {
@@ -127,7 +129,7 @@ static void CreateOverlaySprite(void)
         sprite->data[3] = -1;
         sprite->data[6] = -1;
         sprite->data[7] = -1;
-        sprite->oam.priority = 1;
+        sprite->oam.priority = 2;
     }
     SetSurfBlob_BobState(overlaySprite, BOB_PLAYER_AND_MON);
 }
